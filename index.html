@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SYED ALIYAN — Web Developer</title>
+<title>SYED ALIYAN — Portfolio</title>
 
 <meta name="description"
-content="Syed Aliyan — Web Developer creating modern, premium and creative digital experiences.">
+content="Syed Aliyan — Web Developer and Creative Digital Experience Builder.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 :root{
-    --gold:#d8b85c;
-    --gold-light:#ffe59a;
+
     --black:#030303;
-    --card:#0b0b0b;
+    --black2:#080808;
+
+    --gold:#d8b85c;
+    --gold-light:#ffe39a;
+
     --white:#ffffff;
-    --muted:#929292;
+    --muted:#8e8e8e;
+
     --border:rgba(255,255,255,.09);
+
 }
 
 *{
@@ -34,20 +48,41 @@ html{
 }
 
 body{
+
     background:var(--black);
+
     color:white;
+
     font-family:Inter,Arial,sans-serif;
+
     overflow-x:hidden;
+
 }
 
 body::before{
+
     content:"";
+
     position:fixed;
+
     inset:0;
-    z-index:-2;
+
+    z-index:-5;
+
     background:
-    radial-gradient(circle at 15% 20%,rgba(216,184,92,.12),transparent 28%),
-    radial-gradient(circle at 85% 75%,rgba(255,255,255,.05),transparent 25%);
+
+    radial-gradient(
+        circle at 15% 15%,
+        rgba(216,184,92,.10),
+        transparent 30%
+    ),
+
+    radial-gradient(
+        circle at 85% 75%,
+        rgba(255,255,255,.04),
+        transparent 25%
+    );
+
 }
 
 a{
@@ -55,632 +90,1520 @@ a{
     color:inherit;
 }
 
-.container{
-    width:min(1180px,92%);
-    margin:auto;
-}
-
-.section{
-    padding:110px 0;
-}
-
-.gold{
-    color:var(--gold-light);
+button{
+    font-family:inherit;
 }
 
 
-/* =========================
-   INTRO SCREEN
-========================= */
+/* =========================================================
+   CINEMATIC INTRO
+========================================================= */
 
-.intro{
+#cinematicIntro{
+
     position:fixed;
+
     inset:0;
-    z-index:999;
+
+    width:100%;
+    height:100%;
+
     background:#020202;
+
+    z-index:99999;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
-    transition:1s;
+
+    overflow:hidden;
+
+    transition:
+
+        opacity 1.2s ease,
+
+        visibility 1.2s ease;
+
 }
 
-.intro.hide{
+
+/* Gold cinematic light */
+
+#cinematicIntro::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(216,184,92,.16),
+            transparent 65%
+        );
+
+    animation:
+
+        cinematicGlow 4s ease-in-out infinite;
+
+}
+
+
+/* Thin cinematic lines */
+
+.cinema-line{
+
+    position:absolute;
+
+    width:100%;
+
+    height:1px;
+
+    left:0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,227,154,.5),
+            transparent
+        );
+
+    opacity:.35;
+
+}
+
+.cinema-line.top{
+    top:18%;
+}
+
+.cinema-line.bottom{
+    bottom:18%;
+}
+
+
+/* Intro content */
+
+.intro-content{
+
+    position:relative;
+
+    z-index:5;
+
+    width:90%;
+
+}
+
+
+/* Small welcome */
+
+.intro-welcome{
+
+    display:block;
+
+    color:#888;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    letter-spacing:8px;
+
+    margin-bottom:25px;
+
     opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+
+    transform:translateY(20px);
+
+    animation:
+
+        welcomeReveal .9s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+
+    animation-delay:.4s;
+
 }
 
-.intro small{
-    color:#777;
-    letter-spacing:6px;
-    font-size:11px;
-}
 
-.intro h1{
+/* Main title */
+
+.intro-name{
+
     font-family:"Space Grotesk";
-    font-size:clamp(50px,10vw,105px);
-    letter-spacing:-5px;
-    margin:20px 0;
+
+    font-weight:700;
+
+    font-size:
+
+        clamp(
+            45px,
+            10vw,
+            110px
+        );
+
+    line-height:.82;
+
+    letter-spacing:-6px;
+
+    margin:0;
+
+    overflow:hidden;
+
 }
 
-.intro h1 span{
-    color:var(--gold-light);
+
+/* Each animated line */
+
+.intro-name span{
+
+    display:block;
+
+    opacity:0;
+
+    transform:
+
+        translateY(120px)
+        scale(.85);
+
+    animation:
+
+        cinematicText 1.15s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+
 }
 
-.enter-btn{
-    padding:15px 25px;
-    border-radius:50px;
-    border:1px solid rgba(216,184,92,.5);
-    background:transparent;
+
+/* Aliyan */
+
+.intro-name .aliyan{
+
     color:white;
-    cursor:pointer;
-    transition:.3s;
-}
 
-.enter-btn:hover{
-    background:var(--gold-light);
-    color:black;
+    animation-delay:.65s;
+
 }
 
 
-/* =========================
+/* Portfolio */
+
+.intro-name .portfolio{
+
+    color:var(--gold-light);
+
+    font-size:.58em;
+
+    letter-spacing:9px;
+
+    margin-top:17px;
+
+    animation-delay:1s;
+
+}
+
+
+/* Gold line */
+
+.intro-gold-line{
+
+    width:0;
+
+    height:1px;
+
+    margin:32px auto 0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold-light),
+            transparent
+        );
+
+    animation:
+
+        goldLine 1.1s ease forwards;
+
+    animation-delay:1.45s;
+
+}
+
+
+/* Little loading text */
+
+.intro-loading{
+
+    margin-top:22px;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#555;
+
+    opacity:0;
+
+    animation:
+
+        welcomeFade .8s forwards;
+
+    animation-delay:1.7s;
+
+}
+
+
+/* Intro disappears */
+
+#cinematicIntro.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* Cinematic exit flash */
+
+#cinematicIntro.hide::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    opacity:.15;
+
+    animation:cinemaFlash .7s ease;
+
+}
+
+
+@keyframes welcomeReveal{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+@keyframes cinematicText{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+
+            translateY(120px)
+            scale(.85);
+
+        filter:blur(12px);
+
+    }
+
+    60%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
+
+    }
+
+}
+
+
+@keyframes goldLine{
+
+    to{
+
+        width:280px;
+
+    }
+
+}
+
+
+@keyframes welcomeFade{
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+@keyframes cinematicGlow{
+
+    0%,100%{
+
+        transform:scale(.85);
+
+        opacity:.45;
+
+    }
+
+    50%{
+
+        transform:scale(1.15);
+
+        opacity:1;
+
+    }
+
+}
+
+
+@keyframes cinemaFlash{
+
+    from{
+        opacity:.35;
+    }
+
+    to{
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
    NAVBAR
-========================= */
+========================================================= */
 
 nav{
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
-    height:75px;
-    z-index:100;
-    background:rgba(3,3,3,.65);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border);
+
+    height:74px;
+
+    z-index:500;
+
+    background:
+
+        rgba(3,3,3,.65);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+
+        1px solid var(--border);
+
 }
+
 
 .nav{
+
     height:100%;
+
+    width:min(1180px,92%);
+
+    margin:auto;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
 }
+
 
 .logo{
+
     font-size:18px;
+
     font-weight:900;
+
     letter-spacing:3px;
+
 }
+
 
 .logo span{
+
     color:var(--gold-light);
+
 }
+
 
 .nav-links{
+
     display:flex;
+
     gap:30px;
+
 }
+
 
 .nav-links a{
+
     color:#999;
-    font-size:12px;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+
     transition:.3s;
+
 }
+
 
 .nav-links a:hover{
+
     color:white;
+
 }
 
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
+
+.container{
+
+    width:min(1180px,92%);
+
+    margin:auto;
+
+}
+
 
 .hero{
+
     min-height:100vh;
-    padding:130px 0 80px;
+
+    padding:
+
+        130px 0
+        80px;
+
     display:flex;
+
     align-items:center;
+
 }
+
 
 .hero-grid{
+
     display:grid;
-    grid-template-columns:1.1fr .9fr;
+
+    grid-template-columns:
+
+        1.1fr
+        .9fr;
+
     gap:70px;
+
     align-items:center;
+
 }
+
 
 .status{
+
     display:inline-flex;
+
     align-items:center;
+
     gap:9px;
+
     padding:10px 15px;
-    border:1px solid var(--border);
+
+    border:
+
+        1px solid var(--border);
+
     border-radius:50px;
+
     color:#999;
-    font-size:11px;
+
+    font-size:10px;
+
     letter-spacing:1.5px;
+
 }
+
 
 .status-dot{
+
     width:7px;
+
     height:7px;
+
     border-radius:50%;
-    background:#63ff91;
-    box-shadow:0 0 15px #63ff91;
+
+    background:#62ff91;
+
+    box-shadow:
+
+        0 0 18px #62ff91;
+
 }
+
 
 .hero h1{
+
     font-family:"Space Grotesk";
-    font-size:clamp(55px,8vw,105px);
-    line-height:.88;
+
+    font-size:
+
+        clamp(
+            55px,
+            8vw,
+            105px
+        );
+
+    line-height:.87;
+
     letter-spacing:-6px;
+
     margin:28px 0;
+
 }
+
 
 .outline{
+
     color:transparent;
-    -webkit-text-stroke:1px #777;
+
+    -webkit-text-stroke:
+
+        1px #777;
+
 }
+
+
+.gold{
+
+    color:var(--gold-light);
+
+}
+
 
 .hero-description{
+
     color:#999;
-    max-width:600px;
+
+    max-width:590px;
+
     line-height:1.9;
-    font-size:16px;
+
+    font-size:15px;
+
 }
+
 
 .buttons{
+
     display:flex;
-    gap:12px;
+
     flex-wrap:wrap;
-    margin-top:32px;
+
+    gap:12px;
+
+    margin-top:30px;
+
 }
+
 
 .btn{
+
     display:inline-flex;
+
     align-items:center;
+
     justify-content:center;
-    padding:14px 22px;
+
+    padding:14px 21px;
+
     border-radius:50px;
-    font-size:12px;
+
+    font-size:11px;
+
     font-weight:800;
+
     border:1px solid transparent;
+
     cursor:pointer;
+
     transition:.3s;
+
 }
+
 
 .btn:hover{
+
     transform:translateY(-4px);
+
 }
+
 
 .btn-gold{
-    background:var(--gold-light);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffe9a7,
+            #d8b85c
+        );
+
     color:#000;
+
 }
+
 
 .btn-dark{
+
     background:transparent;
-    border-color:var(--border);
+
     color:white;
+
+    border-color:var(--border);
+
 }
 
 
-/* =========================
-   3D PROFILE PLACEHOLDER
-========================= */
+/* =========================================================
+   PROFILE ANIMATION
+========================================================= */
 
 .profile-area{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+
     min-height:500px;
-    position:relative;
-}
 
-.profile-circle{
-    width:370px;
-    height:370px;
-    border-radius:50%;
-    border:1px solid rgba(216,184,92,.3);
     display:flex;
-    justify-content:center;
+
     align-items:center;
+
+    justify-content:center;
+
     position:relative;
-    animation:rotate 15s linear infinite;
+
 }
 
-.profile-circle::before{
-    content:"";
-    position:absolute;
-    width:12px;
-    height:12px;
+
+.profile-ring{
+
+    width:370px;
+
+    height:370px;
+
+    border:
+
+        1px solid
+        rgba(216,184,92,.35);
+
     border-radius:50%;
-    background:var(--gold-light);
-    top:15px;
-    box-shadow:0 0 25px var(--gold-light);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    animation:
+
+        rotateRing 16s
+        linear infinite;
+
 }
+
+
+.profile-ring::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:9px;
+
+    height:9px;
+
+    border-radius:50%;
+
+    background:var(--gold-light);
+
+    box-shadow:
+
+        0 0 25px
+        var(--gold-light);
+
+}
+
 
 .profile-inner{
-    width:300px;
-    height:300px;
+
+    width:290px;
+
+    height:290px;
+
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.1);
-    background:
-    radial-gradient(circle at center,
-    rgba(216,184,92,.15),
-    #0a0a0a 65%);
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
-    animation:counterRotate 15s linear infinite;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(216,184,92,.16),
+            #090909 65%
+        );
+
+    border:
+
+        1px solid
+        rgba(255,255,255,.08);
+
+    animation:
+
+        counterRing 16s
+        linear infinite;
+
 }
+
 
 .profile-inner h3{
+
     font-family:"Space Grotesk";
+
     font-size:28px;
+
 }
+
 
 .profile-inner p{
+
     color:#777;
-    font-size:11px;
-    letter-spacing:2px;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
     margin-top:10px;
+
 }
 
-@keyframes rotate{
+
+@keyframes rotateRing{
+
     to{
         transform:rotate(360deg);
     }
+
 }
 
-@keyframes counterRotate{
+
+@keyframes counterRing{
+
     to{
         transform:rotate(-360deg);
     }
+
 }
 
 
-/* =========================
+/* =========================================================
    MARQUEE
-========================= */
+========================================================= */
 
 .marquee{
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-    padding:18px 0;
+
     overflow:hidden;
+
     white-space:nowrap;
+
+    border-top:
+
+        1px solid var(--border);
+
+    border-bottom:
+
+        1px solid var(--border);
+
+    padding:17px 0;
+
 }
+
 
 .marquee-track{
+
     display:inline-block;
-    animation:marquee 25s linear infinite;
+
+    animation:
+
+        marquee 24s
+        linear infinite;
+
 }
+
 
 .marquee span{
+
     margin:0 30px;
+
     color:#777;
+
     font-family:"Space Grotesk";
+
+    font-size:12px;
+
     letter-spacing:3px;
-    font-size:13px;
+
 }
+
 
 .marquee b{
+
     color:var(--gold-light);
+
 }
+
 
 @keyframes marquee{
+
     to{
-        transform:translateX(-50%);
+
+        transform:
+            translateX(-50%);
+
     }
+
 }
 
 
-/* =========================
-   SECTION TITLES
-========================= */
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+
+    padding:110px 0;
+
+}
+
 
 .section-title{
+
     text-align:center;
-    margin-bottom:60px;
+
+    margin-bottom:55px;
+
 }
+
 
 .section-title small{
+
     color:var(--gold-light);
+
     letter-spacing:4px;
+
+    font-size:10px;
+
 }
+
 
 .section-title h2{
+
     font-family:"Space Grotesk";
-    font-size:clamp(42px,7vw,75px);
+
+    font-size:
+
+        clamp(
+            42px,
+            7vw,
+            76px
+        );
+
     letter-spacing:-4px;
-    margin-top:15px;
+
+    margin-top:14px;
+
 }
 
 
-/* =========================
+/* =========================================================
    ABOUT
-========================= */
+========================================================= */
 
 .about-grid{
+
     display:grid;
-    grid-template-columns:.7fr 1.3fr;
+
+    grid-template-columns:
+
+        .7fr
+        1.3fr;
+
     gap:70px;
+
     align-items:center;
+
 }
+
 
 .about-number{
+
     font-family:"Space Grotesk";
+
     font-size:180px;
+
     color:transparent;
-    -webkit-text-stroke:1px #292929;
+
+    -webkit-text-stroke:
+
+        1px #292929;
+
 }
+
 
 .about h3{
+
     font-family:"Space Grotesk";
+
     font-size:38px;
+
     margin-bottom:20px;
+
 }
+
 
 .about p{
+
     color:#999;
+
     line-height:1.9;
+
     margin-bottom:18px;
+
 }
 
 
-/* =========================
+/* =========================================================
    SKILLS
-========================= */
+========================================================= */
 
 .skills{
+
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+
+        repeat(4,1fr);
+
     gap:15px;
+
 }
+
 
 .skill{
-    min-height:170px;
+
+    min-height:165px;
+
     padding:27px;
-    background:linear-gradient(145deg,#0e0e0e,#080808);
-    border:1px solid var(--border);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #0e0e0e,
+            #080808
+        );
+
+    border:
+
+        1px solid var(--border);
+
     border-radius:20px;
+
     transition:.4s;
+
 }
+
 
 .skill:hover{
-    transform:translateY(-10px);
-    border-color:rgba(216,184,92,.5);
+
+    transform:
+
+        translateY(-9px);
+
+    border-color:
+
+        rgba(216,184,92,.5);
+
 }
+
 
 .skill-number{
+
     color:#555;
-    font-size:12px;
+
+    font-size:11px;
+
 }
+
 
 .skill h3{
+
     margin-top:45px;
-    font-size:18px;
+
+    font-size:17px;
+
 }
 
 
-/* =========================
+/* =========================================================
    PROJECTS
-========================= */
+========================================================= */
 
 .projects{
+
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
     gap:18px;
+
 }
+
 
 .project{
-    min-height:370px;
+
+    min-height:350px;
+
     position:relative;
+
     overflow:hidden;
-    border:1px solid var(--border);
+
+    border:
+
+        1px solid var(--border);
+
     border-radius:23px;
+
     background:#090909;
+
     transition:.4s;
+
 }
+
 
 .project:hover{
-    transform:translateY(-7px);
-    border-color:rgba(216,184,92,.5);
+
+    transform:
+
+        translateY(-7px);
+
+    border-color:
+
+        rgba(216,184,92,.5);
+
 }
+
 
 .project-number{
+
     position:absolute;
+
     inset:0;
+
     display:flex;
-    justify-content:center;
+
     align-items:center;
+
+    justify-content:center;
+
     font-family:"Space Grotesk";
+
     font-size:110px;
+
     font-weight:900;
+
     color:#151515;
+
 }
+
 
 .project-info{
+
     position:absolute;
-    left:25px;
+
     bottom:25px;
+
+    left:25px;
+
 }
+
 
 .project-info small{
+
     color:var(--gold-light);
+
     letter-spacing:2px;
+
 }
+
 
 .project-info h3{
+
     font-family:"Space Grotesk";
-    font-size:30px;
-    margin-top:8px;
+
+    font-size:29px;
+
+    margin-top:7px;
+
 }
 
 
-/* =========================
+/* =========================================================
    TERMINAL
-========================= */
+========================================================= */
 
 .terminal{
-    background:#080808;
-    border:1px solid var(--border);
+
+    border:
+
+        1px solid var(--border);
+
     border-radius:20px;
+
     overflow:hidden;
+
+    background:#080808;
+
 }
+
 
 .terminal-top{
+
     height:43px;
-    border-bottom:1px solid var(--border);
+
+    border-bottom:
+
+        1px solid var(--border);
+
     display:flex;
-    gap:7px;
+
     align-items:center;
+
+    gap:7px;
+
     padding:0 15px;
+
 }
+
 
 .terminal-dot{
+
     width:10px;
+
     height:10px;
+
     border-radius:50%;
+
     background:#333;
+
 }
+
 
 .terminal-body{
+
     padding:30px;
-    font-family:monospace;
-    line-height:2;
-    color:#999;
+
     min-height:290px;
+
+    font-family:monospace;
+
+    line-height:2;
+
+    color:#999;
+
 }
+
 
 .green{
+
     color:#70ff9a;
+
 }
+
 
 .terminal-gold{
+
     color:var(--gold-light);
+
 }
 
 
-/* =========================
+/* =========================================================
    SERVICES
-========================= */
+========================================================= */
 
 .services{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
     gap:15px;
+
 }
+
 
 .service{
+
     padding:35px;
-    border:1px solid var(--border);
+
+    border:
+
+        1px solid var(--border);
+
     border-radius:20px;
+
     background:#0a0a0a;
+
 }
+
 
 .service-icon{
-    font-size:32px;
+
     color:var(--gold-light);
+
+    font-size:30px;
+
 }
+
 
 .service h3{
+
     margin:22px 0 12px;
+
 }
+
 
 .service p{
+
     color:#888;
+
     line-height:1.8;
+
 }
 
 
-/* =========================
+/* =========================================================
    CONTACT
-========================= */
+========================================================= */
 
 .contact{
+
     text-align:center;
+
     padding:80px 20px;
-    border:1px solid var(--border);
+
+    border:
+
+        1px solid var(--border);
+
     border-radius:30px;
+
     background:
-    radial-gradient(circle at center,
-    rgba(216,184,92,.09),
-    transparent 50%);
+
+        radial-gradient(
+            circle at center,
+            rgba(216,184,92,.09),
+            transparent 52%
+        );
+
 }
+
 
 .contact small{
+
     color:var(--gold-light);
+
     letter-spacing:3px;
+
 }
+
 
 .contact h2{
+
     font-family:"Space Grotesk";
-    font-size:clamp(45px,8vw,90px);
+
+    font-size:
+
+        clamp(
+            45px,
+            8vw,
+            90px
+        );
+
     line-height:.9;
+
     letter-spacing:-5px;
+
     margin:18px 0;
+
 }
+
 
 .contact p{
+
     max-width:550px;
+
     margin:auto;
+
     color:#888;
+
     line-height:1.8;
+
 }
+
 
 .contact-buttons{
+
     justify-content:center;
+
 }
 
 
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer{
+
     padding:35px 0;
+
     text-align:center;
-    border-top:1px solid var(--border);
+
+    border-top:
+
+        1px solid var(--border);
+
     color:#666;
-    font-size:11px;
+
+    font-size:10px;
+
 }
 
 
-/* =========================
-   CURSOR
-========================= */
-
-.cursor{
-    position:fixed;
-    width:20px;
-    height:20px;
-    border:1px solid var(--gold-light);
-    border-radius:50%;
-    pointer-events:none;
-    transform:translate(-50%,-50%);
-    z-index:500;
-}
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
 
 .reveal{
+
     opacity:0;
-    transform:translateY(35px);
-    transition:.8s;
+
+    transform:
+
+        translateY(35px);
+
+    transition:
+
+        opacity .8s ease,
+        transform .8s ease;
+
 }
+
 
 .reveal.show{
+
     opacity:1;
-    transform:translateY(0);
+
+    transform:
+
+        translateY(0);
+
 }
 
 
-/* =========================
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor{
+
+    position:fixed;
+
+    width:18px;
+
+    height:18px;
+
+    border:
+
+        1px solid var(--gold-light);
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    z-index:999999;
+
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:850px){
 
@@ -688,13 +1611,17 @@ footer{
         display:none;
     }
 
-    .hero-grid,
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
     .about-grid{
         grid-template-columns:1fr;
     }
 
     .skills{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .projects{
@@ -709,14 +1636,14 @@ footer{
         min-height:400px;
     }
 
-    .profile-circle{
+    .profile-ring{
         width:300px;
         height:300px;
     }
 
     .profile-inner{
-        width:240px;
-        height:240px;
+        width:235px;
+        height:235px;
     }
 
     .about-number{
@@ -724,6 +1651,7 @@ footer{
     }
 
 }
+
 
 @media(max-width:500px){
 
@@ -739,62 +1667,137 @@ footer{
         display:none;
     }
 
+    .intro-name{
+        letter-spacing:-4px;
+    }
+
+    .intro-name .portfolio{
+        letter-spacing:5px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        scroll-behavior:auto !important;
+
+        transition-duration:.01ms !important;
+
+    }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- INTRO -->
+<!-- =======================================================
+     CINEMATIC INTRO
+======================================================== -->
 
-<div class="intro" id="intro">
+<div id="cinematicIntro">
 
-<div>
+    <div class="cinema-line top"></div>
 
-<small>WELCOME TO</small>
+    <div class="cinema-line bottom"></div>
 
-<h1>
-SYED <span>ALIYAN</span>
-</h1>
 
-<button class="enter-btn" onclick="enterWebsite()">
-ENTER MY EXPERIENCE →
-</button>
+    <div class="intro-content">
+
+        <span class="intro-welcome">
+            WELCOME TO
+        </span>
+
+
+        <h1 class="intro-name">
+
+            <span class="aliyan">
+                SYED ALIYAN
+            </span>
+
+            <span class="portfolio">
+                PORTFOLIO
+            </span>
+
+        </h1>
+
+
+        <div class="intro-gold-line"></div>
+
+
+        <div class="intro-loading">
+            CREATING DIGITAL EXPERIENCES
+        </div>
+
+    </div>
 
 </div>
 
-</div>
 
 
-<!-- NAVBAR -->
+<!-- =======================================================
+     NAVBAR
+======================================================== -->
 
 <nav>
 
-<div class="container nav">
+<div class="nav">
 
-<div class="logo">
-SYED <span>ALIYAN</span>
-</div>
+    <div class="logo">
+        SYED <span>ALIYAN</span>
+    </div>
 
-<div class="nav-links">
 
-<a href="#about">ABOUT</a>
-<a href="#skills">SKILLS</a>
-<a href="#work">WORK</a>
-<a href="#services">SERVICES</a>
-<a href="#contact">CONTACT</a>
+    <div class="nav-links">
 
-</div>
+        <a href="#about">
+            ABOUT
+        </a>
+
+        <a href="#skills">
+            SKILLS
+        </a>
+
+        <a href="#work">
+            WORK
+        </a>
+
+        <a href="#services">
+            SERVICES
+        </a>
+
+        <a href="#contact">
+            CONTACT
+        </a>
+
+    </div>
 
 </div>
 
 </nav>
 
 
-<!-- HERO -->
+
+<!-- =======================================================
+     HERO
+======================================================== -->
 
 <section class="hero">
 
@@ -803,733 +1806,20 @@ SYED <span>ALIYAN</span>
 
 <div>
 
-<div class="status">
+    <div class="status">
 
-<span class="status-dot"></span>
+        <span class="status-dot"></span>
 
-AVAILABLE FOR FREELANCE PROJECTS
+        AVAILABLE FOR FREELANCE PROJECTS
 
-</div>
+    </div>
 
 
-<h1>
+    <h1>
 
-I BUILD<br>
+        I BUILD
 
-<span class="outline">
-DIGITAL
-</span><br>
+        <br>
 
-<span class="gold">
-EXPERIENCES.
-</span>
-
-</h1>
-
-
-<p class="hero-description">
-
-I'm Syed Aliyan — a web developer focused on creating
-premium, modern and unforgettable digital experiences
-for businesses, brands and ambitious people.
-
-</p>
-
-
-<div class="buttons">
-
-<a href="#work" class="btn btn-gold">
-VIEW MY WORK →
-</a>
-
-<a href="#contact" class="btn btn-dark">
-LET'S TALK
-</a>
-
-<button class="btn btn-dark" onclick="speakIntro()">
-🔊 HEAR MY INTRO
-</button>
-
-</div>
-
-</div>
-
-
-<!-- ANIMATED PROFILE PLACEHOLDER -->
-
-<div class="profile-area">
-
-<div class="profile-circle">
-
-<div class="profile-inner">
-
-<div>
-
-<h3>
-SYED<br>
-<span class="gold">ALIYAN</span>
-</h3>
-
-<p>
-WEB DEVELOPER
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- MOVING TEXT -->
-
-<div class="marquee">
-
-<div class="marquee-track">
-
-<span>WEB DEVELOPMENT</span>
-<span>✦</span>
-
-<span>UI / UX</span>
-<span>✦</span>
-
-<span><b>SYED ALIYAN</b></span>
-<span>✦</span>
-
-<span>CREATIVE DEVELOPMENT</span>
-<span>✦</span>
-
-<span>WEB DEVELOPMENT</span>
-<span>✦</span>
-
-<span>UI / UX</span>
-<span>✦</span>
-
-<span><b>SYED ALIYAN</b></span>
-<span>✦</span>
-
-</div>
-
-</div>
-
-
-<!-- ABOUT -->
-
-<section class="section" id="about">
-
-<div class="container">
-
-<div class="section-title">
-
-<small>
-01 — ABOUT ME
-</small>
-
-<h2>
-WHO IS <span class="gold">ALIYAN?</span>
-</h2>
-
-</div>
-
-
-<div class="about-grid">
-
-<div class="about-number reveal">
-01
-</div>
-
-
-<div class="about reveal">
-
-<h3>
-
-Not just websites.<br>
-
-<span class="gold">
-Experiences.
-</span>
-
-</h3>
-
-
-<p>
-
-I create websites designed to make visitors stop,
-explore and remember.
-
-</p>
-
-
-<p>
-
-My focus is modern visual design, smooth interactions,
-responsive experiences and strong digital identity.
-
-</p>
-
-
-<p>
-
-I'm building my journey as a web developer and turning
-ideas into professional online experiences.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SKILLS -->
-
-<section class="section" id="skills">
-
-<div class="container">
-
-<div class="section-title">
-
-<small>
-02 — MY ARSENAL
-</small>
-
-<h2>
-WHAT I <span class="gold">CREATE</span>
-</h2>
-
-</div>
-
-
-<div class="skills">
-
-
-<div class="skill reveal">
-<div class="skill-number">01</div>
-<h3>HTML / CSS</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">02</div>
-<h3>JavaScript</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">03</div>
-<h3>UI / UX Design</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">04</div>
-<h3>Responsive Web</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">05</div>
-<h3>Landing Pages</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">06</div>
-<h3>E-Commerce</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">07</div>
-<h3>Creative Websites</h3>
-</div>
-
-
-<div class="skill reveal">
-<div class="skill-number">08</div>
-<h3>Brand Websites</h3>
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- PROJECTS -->
-
-<section class="section" id="work">
-
-<div class="container">
-
-<div class="section-title">
-
-<small>
-03 — SELECTED WORK
-</small>
-
-<h2>
-PROJECT <span class="gold">UNIVERSE</span>
-</h2>
-
-</div>
-
-
-<div class="projects">
-
-
-<div class="project reveal">
-
-<div class="project-number">
-01
-</div>
-
-<div class="project-info">
-
-<small>
-ECOMMERCE
-</small>
-
-<h3>
-SYED COLLECTION
-</h3>
-
-</div>
-
-</div>
-
-
-<div class="project reveal">
-
-<div class="project-number">
-02
-</div>
-
-<div class="project-info">
-
-<small>
-PERSONAL BRAND
-</small>
-
-<h3>
-SYED ALIYAN
-</h3>
-
-</div>
-
-</div>
-
-
-<div class="project reveal">
-
-<div class="project-number">
-03
-</div>
-
-<div class="project-info">
-
-<small>
-CREATIVE WEB
-</small>
-
-<h3>
-FUTURE PROJECT
-</h3>
-
-</div>
-
-</div>
-
-
-<div class="project reveal">
-
-<div class="project-number">
-04
-</div>
-
-<div class="project-info">
-
-<small>
-COMING SOON
-</small>
-
-<h3>
-NEW EXPERIENCE
-</h3>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- TERMINAL -->
-
-<section class="section">
-
-<div class="container">
-
-<div class="section-title">
-
-<small>
-04 — BEHIND THE SCREEN
-</small>
-
-<h2>
-MY <span class="gold">WORKSPACE</span>
-</h2>
-
-</div>
-
-
-<div class="terminal reveal">
-
-<div class="terminal-top">
-
-<div class="terminal-dot"></div>
-<div class="terminal-dot"></div>
-<div class="terminal-dot"></div>
-
-</div>
-
-
-<div class="terminal-body">
-
-<div>
-
-<span class="green">
-aliyan@portfolio
-</span>
-
-:~$
-
-<span class="terminal-gold">
-whoami
-</span>
-
-</div>
-
-
-<div>
-> Syed Aliyan
-</div>
-
-<div>
-> Web Developer
-</div>
-
-<div>
-> Creative Problem Solver
-</div>
-
-
-<br>
-
-
-<div>
-
-<span class="green">
-aliyan@portfolio
-</span>
-
-:~$
-
-<span class="terminal-gold">
-build --experience
-</span>
-
-</div>
-
-
-<div id="terminalText">
-> Initializing creativity...
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SERVICES -->
-
-<section class="section" id="services">
-
-<div class="container">
-
-
-<div class="section-title">
-
-<small>
-05 — SERVICES
-</small>
-
-<h2>
-LET'S BUILD <span class="gold">SOMETHING</span>
-</h2>
-
-</div>
-
-
-<div class="services">
-
-
-<div class="service reveal">
-
-<div class="service-icon">
-◈
-</div>
-
-<h3>
-Business Websites
-</h3>
-
-<p>
-Professional websites for businesses that want
-a stronger online presence.
-</p>
-
-</div>
-
-
-<div class="service reveal">
-
-<div class="service-icon">
-✦
-</div>
-
-<h3>
-Creative Portfolios
-</h3>
-
-<p>
-Unique personal portfolios designed to showcase
-skills and work professionally.
-</p>
-
-</div>
-
-
-<div class="service reveal">
-
-<div class="service-icon">
-⌁
-</div>
-
-<h3>
-Landing Pages
-</h3>
-
-<p>
-Modern landing pages with strong visuals,
-responsive layouts and smooth interactions.
-</p>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="section" id="contact">
-
-<div class="container">
-
-<div class="contact">
-
-<small>
-HAVE A PROJECT?
-</small>
-
-
-<h2>
-
-LET'S MAKE<br>
-
-SOMETHING
-<span class="gold">
-ICONIC.
-</span>
-
-</h2>
-
-
-<p>
-
-Have an idea, business or project?
-Let's turn it into a professional digital experience.
-
-</p>
-
-
-<div class="buttons contact-buttons">
-
-
-<a
-class="btn btn-gold"
-href="https://wa.me/923182477207"
-target="_blank">
-
-WHATSAPP ME →
-
-</a>
-
-
-<a
-class="btn btn-dark"
-href="mailto:syedaliyanali78@gmail.com">
-
-EMAIL ME
-
-</a>
-
-
-<!-- GitHub -->
-
-<a
-class="btn btn-dark"
-href="https://github.com/syedaliyanali78"
-target="_blank">
-
-GITHUB
-
-</a>
-
-
-<!-- LinkedIn -->
-
-<a
-class="btn btn-dark"
-href="https://www.linkedin.com/in/syedaliyanali78/"
-target="_blank">
-
-LINKEDIN
-
-</a>
-
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<footer>
-
-© 2026 SYED ALIYAN — Crafted with creativity.
-
-</footer>
-
-
-<div class="cursor" id="cursor"></div>
-
-
-<script>
-
-
-/* =========================
-   ENTER EXPERIENCE
-========================= */
-
-function enterWebsite(){
-
-document
-.getElementById("intro")
-.classList
-.add("hide");
-
-setTimeout(function(){
-
-speakIntro();
-
-},700);
-
-}
-
-
-/* =========================
-   VOICE
-========================= */
-
-function speakIntro(){
-
-if(!("speechSynthesis" in window)){
-return;
-}
-
-speechSynthesis.cancel();
-
-let message =
-
-"Hello and welcome to my portfolio. " +
-
-"I'm Syed Aliyan, a web developer and creative digital experience builder. " +
-
-"Take a look around, explore my work, and let's build something amazing together.";
-
-let voice =
-new SpeechSynthesisUtterance(message);
-
-voice.rate = .9;
-voice.pitch = 1;
-voice.volume = 1;
-
-speechSynthesis.speak(voice);
-
-}
-
-
-/* =========================
-   CUSTOM CURSOR
-========================= */
-
-const cursor =
-document.getElementById("cursor");
-
-document.addEventListener(
-"mousemove",
-function(e){
-
-cursor.style.left =
-e.clientX + "px";
-
-cursor.style.top =
-e.clientY + "px";
-
-});
-
-
-/* =========================
-   TERMINAL ANIMATION
-======
+        <span class="outline">
+    
